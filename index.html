@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#7657ff">
+<title>Vibe — sua rede, seu mundo</title>
+<style>
+:root{--bg:#f5f5fb;--panel:#fff;--text:#191827;--muted:#77758b;--line:#e7e5f0;--accent:#7657ff;--accent2:#c04cff;--soft:#eeeaff;--shadow:0 8px 30px #29204b0d}
+[data-theme="dark"]{--bg:#101018;--panel:#1b1a26;--text:#f5f3ff;--muted:#aaa6bd;--line:#302e40;--accent:#a08aff;--accent2:#df83ff;--soft:#2a2544;--shadow:0 8px 30px #0003}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.45 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;transition:background .2s,color .2s}
+button,input,textarea,select{font:inherit}button{cursor:pointer;border:0}
+.app{max-width:1400px;margin:auto;min-height:100vh}
+.topbar{height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;border-bottom:1px solid var(--line);background:var(--panel);position:sticky;top:0;z-index:10}
+.brand{display:flex;align-items:center;gap:10px;font-size:25px;font-weight:900;letter-spacing:-1px}.logo{height:39px;width:39px;border-radius:14px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;color:white;font-size:23px;box-shadow:0 6px 15px #7657ff40}
+.top-actions{display:flex;gap:10px;align-items:center}.pill,.iconbtn{background:var(--bg);border:1px solid var(--line);color:var(--text);padding:10px 14px;border-radius:14px}.iconbtn{font-size:18px;width:42px;height:42px;padding:0}.layout{display:grid;grid-template-columns:220px minmax(0,700px) 260px;gap:25px;padding:24px}
+.sidebar{position:sticky;top:100px;align-self:start}.nav{display:grid;gap:7px}.nav button{display:flex;align-items:center;gap:13px;text-align:left;padding:13px 15px;border-radius:14px;background:transparent;color:var(--muted);font-weight:650}.nav button.active,.nav button:hover{background:var(--soft);color:var(--accent)}.nav .ico{width:23px;text-align:center;font-size:19px}.sidebar-note{margin-top:24px;padding:15px;border:1px solid var(--line);border-radius:17px;color:var(--muted);font-size:12px}
+main{min-width:0}.welcome{background:linear-gradient(120deg,#7657ff,#b14cff);color:white;border-radius:22px;padding:23px;margin-bottom:20px;box-shadow:0 12px 28px #7657ff24}.welcome h1{margin:0 0 6px;font-size:25px;letter-spacing:-.7px}.welcome p{margin:0;opacity:.9}
+.composer{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:17px;margin-bottom:20px;box-shadow:var(--shadow)}.composer-head{display:flex;gap:11px;align-items:center}.avatar{width:42px;height:42px;display:grid;place-items:center;flex-shrink:0;border-radius:50%;background:linear-gradient(135deg,#7657ff,#df83ff);color:#fff;font-weight:800;font-size:18px}.composer textarea{width:100%;resize:vertical;min-height:46px;border:0;outline:0;background:transparent;color:var(--text);padding:10px 0}.composer-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:12px;padding-top:13px;border-top:1px solid var(--line)}.action{background:var(--bg);border:1px solid var(--line);color:var(--text);border-radius:12px;padding:9px 12px}.primary{background:linear-gradient(120deg,var(--accent),var(--accent2));color:white;border:0;border-radius:12px;padding:10px 16px;font-weight:750}.spacer{flex:1}.small{font-size:12px;color:var(--muted)}
+.filters{display:flex;gap:8px;overflow:auto;margin:0 0 15px;padding-bottom:3px}.filter{white-space:nowrap;padding:9px 14px;border-radius:99px;border:1px solid var(--line);background:var(--panel);color:var(--muted)}.filter.active{background:var(--soft);border-color:transparent;color:var(--accent);font-weight:750}
+.post{background:var(--panel);border:1px solid var(--line);border-radius:20px;margin-bottom:17px;overflow:hidden;box-shadow:var(--shadow)}.post-head{padding:15px 17px;display:flex;gap:10px;align-items:center}.post-author{font-weight:750}.post-time{font-size:12px;color:var(--muted)}.post-menu{margin-left:auto;background:transparent;color:var(--muted);font-size:21px}.caption{padding:0 17px 14px;white-space:pre-wrap;overflow-wrap:anywhere}.media{display:block;width:100%;max-height:680px;object-fit:contain;background:#09090d}.media.video{max-height:680px}.post-actions{display:flex;align-items:center;gap:6px;padding:12px 15px}.post-actions button{background:transparent;color:var(--muted);padding:7px 9px;border-radius:10px}.post-actions button:hover{background:var(--bg)}.post-actions button.liked{color:#ef4d91}.comments{padding:0 17px 15px}.comment{font-size:13px;margin:7px 0;color:var(--muted);overflow-wrap:anywhere}.comment b{color:var(--text);margin-right:5px}.comment-form{display:flex;gap:7px;margin-top:10px}.comment-form input{min-width:0;flex:1;background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:9px 11px;color:var(--text);outline:0}.comment-form button{background:var(--soft);color:var(--accent);border-radius:11px;padding:8px 12px;font-weight:700}
+.rightcol{position:sticky;top:100px;align-self:start}.sidecard{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:17px;margin-bottom:15px}.sidecard h3{margin:0 0 12px;font-size:15px}.profileline{display:flex;align-items:center;gap:10px}.profileline b{display:block}.profileline small{color:var(--muted)}.statrow{display:flex;justify-content:space-between;margin-top:16px;padding-top:13px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}.statrow strong{color:var(--text)}.tag{display:inline-block;background:var(--soft);color:var(--accent);padding:5px 9px;border-radius:99px;font-size:11px;font-weight:800;margin-bottom:10px}
+.empty{text-align:center;padding:45px 20px;border:1px dashed var(--line);border-radius:18px;color:var(--muted)}.empty .big{font-size:40px;margin-bottom:10px}.hidden{display:none!important}
+.modalback{position:fixed;inset:0;background:#080710a8;z-index:30;display:grid;place-items:center;padding:18px}.modal{width:min(500px,100%);background:var(--panel);color:var(--text);border-radius:22px;padding:22px;max-height:90vh;overflow:auto}.modal h2{margin:0 0 15px}.field{display:grid;gap:6px;margin:12px 0}.field label{font-size:13px;color:var(--muted);font-weight:700}.field input,.field textarea,.field select{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--text);outline:0}.modalfooter{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}.bottomnav{display:none}.toast{position:fixed;bottom:25px;left:50%;transform:translateX(-50%);z-index:50;background:var(--text);color:var(--panel);padding:11px 17px;border-radius:13px;box-shadow:var(--shadow);max-width:90vw;text-align:center}
+@media(max-width:1100px){.layout{grid-template-columns:190px minmax(0,1fr);gap:18px}.rightcol{display:none}}
+@media(max-width:700px){.topbar{height:62px;padding:0 14px}.brand{font-size:22px}.logo{width:34px;height:34px}.top-actions .pill{display:none}.layout{display:block;padding:14px 12px 90px}.sidebar{display:none}.welcome{padding:19px;border-radius:18px}.welcome h1{font-size:22px}.composer{padding:13px}.post{border-radius:17px}.post-head{padding:13px}.bottomnav{position:fixed;bottom:0;left:0;right:0;z-index:20;display:flex;justify-content:space-around;padding:9px 4px calc(9px + env(safe-area-inset-bottom));background:var(--panel);border-top:1px solid var(--line)}.bottomnav button{background:transparent;color:var(--muted);font-size:20px;display:grid;gap:2px;justify-items:center;min-width:48px}.bottomnav button span{font-size:10px}.bottomnav button.active{color:var(--accent)}.media{max-height:72vh}.composer-actions .small{display:none}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="topbar">
+  <div class="brand"><div class="logo">v</div> vibe</div>
+  <div class="top-actions"><span class="pill">🔒 Modo privado · neste dispositivo</span><button class="iconbtn" id="themeBtn" title="Alternar tema" aria-label="Alternar tema">☾</button><button class="iconbtn" id="profileBtn" title="Editar perfil" aria-label="Editar perfil">☺</button></div>
+</header>
+<div class="layout">
+  <aside class="sidebar">
+    <nav class="nav" id="sideNav">
+      <button class="active" data-view="inicio"><span class="ico">⌂</span> Início</button>
+      <button data-view="shorts"><span class="ico">▷</span> Vibe Shorts</button>
+      <button data-view="fotos"><span class="ico">▧</span> Fotos & posts</button>
+      <button data-view="play"><span class="ico">▶</span> Vibe Play</button>
+      <button data-view="perfil"><span class="ico">◉</span> Meu perfil</button>
+    </nav>
+    <div class="sidebar-note"><b>Seu espaço, suas regras.</b><br><br>Esta versão guarda publicações neste navegador. Ainda não existe servidor nem sincronização entre dispositivos.</div>
+  </aside>
+  <main>
+    <section class="welcome"><span class="tag" style="background:#ffffff2b;color:white">BEM-VINDO À VIBE</span><h1>Seu mundo. Sua vibe. ✨</h1><p>Fotos, vídeos curtos e vídeos longos — tudo em um só lugar.</p></section>
+    <section class="composer">
+      <div class="composer-head"><div class="avatar" id="composerAvatar">V</div><textarea id="captionInput" placeholder="O que tá rolando na sua vibe?"></textarea></div>
+      <div class="composer-actions">
+        <label class="action" for="mediaInput">＋ Adicionar mídia</label><input id="mediaInput" type="file" accept="image/*,video/*" multiple class="hidden">
+        <select id="postType" class="action" aria-label="Tipo de publicação"><option value="post">Post / foto</option><option value="short">Short / vídeo curto</option><option value="video">Vídeo longo</option></select>
+        <span id="fileLabel" class="small">Nenhum arquivo selecionado</span><span class="spacer"></span><button class="primary" id="publishBtn">Publicar ↗</button>
+      </div>
+    </section>
+    <div class="filters" id="filters">
+      <button class="filter active" data-filter="todos">Tudo</button><button class="filter" data-filter="post">Fotos & posts</button><button class="filter" data-filter="short">Shorts</button><button class="filter" data-filter="video">Vídeos longos</button>
+    </div>
+    <section id="feed"></section>
+  </main>
+  <aside class="rightcol">
+    <div class="sidecard"><h3>Seu perfil</h3><div class="profileline"><div class="avatar" id="sideAvatar">V</div><div><b id="sideName">Minha Vibe</b><small id="sideHandle">@minhavibe</small></div></div><div class="statrow"><span>Publicações</span><strong id="postCount">0</strong></div><div class="statrow"><span>Curtidas recebidas</span><strong id="likeCount">0</strong></div><button class="action" style="width:100%;margin-top:14px" id="editProfileBtn">Editar perfil</button></div>
+    <div class="sidecard"><h3>💡 Dica da Vibe</h3><p class="small">Use vídeos verticais nos Shorts e fotos ou carrosséis nos posts. Suas publicações ficam salvas neste navegador.</p></div>
+    <div class="sidecard"><h3>🔐 Privacidade</h3><p class="small">A Vibe inicial é local: não envia suas fotos ou vídeos para um servidor. Não limpe os dados do navegador se quiser manter suas publicações.</p></div>
+  </aside>
+</div>
+<nav class="bottomnav" id="bottomNav">
+  <button class="active" data-view="inicio">⌂<span>Início</span></button><button data-view="shorts">▷<span>Shorts</span></button><button data-view="fotos">▧<span>Fotos</span></button><button data-view="play">▶<span>Play</span></button><button data-view="perfil">◉<span>Perfil</span></button>
+</nav>
+</div>
+<div id="modalRoot"></div><div id="toastRoot"></div><script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const DB_NAME='vibe-local-db', STORE='media';
+let db, selectedFiles=[], currentView='inicio', currentFilter='todos';
+let profile=JSON.parse(localStorage.getItem('vibe-profile')||'null')||{name:'Minha Vibe',handle:'@minhavibe',bio:'Criando minha própria vibe ✨'};
+let posts=JSON.parse(localStorage.getItem('vibe-posts')||'[]');
+let theme=localStorage.getItem('vibe-theme')||'light';
+document.documentElement.dataset.theme=theme;
+function openDB(){return new Promise((resolve,reject)=>{const req=indexedDB.open(DB_NAME,1);req.onupgradeneeded=()=>req.result.createObjectStore(STORE);req.onsuccess=()=>{db=req.result;resolve(db)};req.onerror=()=>reject(req.error)})}
+function putMedia(key,blob){return new Promise((resolve,reject)=>{const tx=db.transaction(STORE,'readwrite');tx.objectStore(STORE).put(blob,key);tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error)})}
+function getMedia(key){return new Promise((resolve,reject)=>{const tx=db.transaction(STORE,'readonly');const req=tx.objectStore(STORE).get(key);req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)})}
+function delMedia(key){return new Promise(resolve=>{const tx=db.transaction(STORE,'readwrite');tx.objectStore(STORE).delete(key);tx.oncomplete=resolve;tx.onerror=resolve})}
+function savePosts(){localStorage.setItem('vibe-posts',JSON.stringify(posts))}
+function saveProfile(){localStorage.setItem('vibe-profile',JSON.stringify(profile));renderProfile()}
+function escapeHTML(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function toast(msg){$('#toastRoot').innerHTML=`<div class="toast">${escapeHTML(msg)}</div>`;setTimeout(()=>$('#toastRoot').innerHTML='',2600)}
+function initials(){return (profile.name.trim()[0]||'V').toUpperCase()}
+function renderProfile(){$('#sideName').textContent=profile.name;$('#sideHandle').textContent=profile.handle;$('#sideAvatar').textContent=initials();$('#composerAvatar').textContent=initials();$('#postCount').textContent=posts.length;$('#likeCount').textContent=posts.reduce((n,p)=>n+(p.likes||[]).length,0)}
+function fmtTime(t){const d=Date.now()-t;if(d<60000)return'agora';if(d<3600000)return Math.floor(d/60000)+' min';if(d<86400000)return Math.floor(d/3600000)+' h';return new Date(t).toLocaleDateString('pt-BR')}
+function typeName(t){return t==='short'?'Vibe Short':t==='video'?'Vibe Play':'Post'}
+async function mediaURL(p){if(!p.mediaKey)return null;const blob=await getMedia(p.mediaKey);return blob?URL.createObjectURL(blob):null}
+async function renderFeed(){
+ const feed=$('#feed');feed.innerHTML='';
+ let list=[...posts].sort((a,b)=>b.created-a);
+ if(currentView==='shorts')list=list.filter(p=>p.type==='short');
+ else if(currentView==='fotos')list=list.filter(p=>p.type==='post');
+ else if(currentView==='play')list=list.filter(p=>p.type==='video');
+ else if(currentView==='perfil')list=list;
+ else if(currentFilter!=='todos')list=list.filter(p=>p.type===currentFilter);
+ if(currentView==='perfil'){const header=document.createElement('div');header.className='sidecard';header.innerHTML=`<div class="profileline"><div class="avatar">${escapeHTML(initials())}</div><div><h2 style="margin:0">${escapeHTML(profile.name)}</h2><div class="small">${escapeHTML(profile.handle)}</div></div></div><p>${escapeHTML(profile.bio||'')}</p><button class="action" id="profileEditInline">Editar perfil</button>`;feed.appendChild(header);header.querySelector('button').onclick=showProfileModal}
+ if(!list.length){const e=document.createElement('div');e.className='empty';e.innerHTML=`<div class="big">${currentView==='shorts'?'▷':currentView==='play'?'▶':'✦'}</div><b>${currentView==='perfil'?'Seu perfil começa aqui':currentView==='shorts'?'Nenhum Short ainda':currentView==='play'?'Nenhum vídeo longo ainda':'Sua Vibe começa aqui'}</b><p>Publique uma foto ou vídeo para preencher seu feed.</p><button class="primary" id="emptyCreate">＋ Criar publicação</button>`;feed.appendChild(e);$('#emptyCreate').onclick=()=>$('#captionInput').focus();renderProfile();return}
+ for(const p of list){
+  const el=document.createElement('article');el.className='post';
+  const media=await mediaURL(p);
+  el.innerHTML=`<div class="post-head"><div class="avatar">${escapeHTML(initials())}</div><div><div class="post-author">${escapeHTML(profile.name)} <span class="small">· ${escapeHTML(typeName(p.type))}</span></div><div class="post-time">${escapeHTML(profile.handle)} · ${fmtTime(p.created)}</div></div><button class="post-menu" title="Excluir publicação" aria-label="Excluir publicação">⋯</button></div>${p.caption?`<div class="caption">${escapeHTML(p.caption)}</div>`:''}${media?(p.mediaKind.startsWith('video')?`<video class="media video" src="${media}" controls playsinline preload="metadata"></video>`:`<img class="media" src="${media}" alt="Mídia publicada na Vibe">`):''}<div class="post-actions"><button class="${p.likes?.includes('me')?'liked':''}" data-like>♥ ${p.likes?.length||0} curtidas</button><button data-comment>▢ ${p.comments?.length||0} comentários</button><button data-share>↗ Compartilhar</button><span class="spacer"></span><span class="small">${escapeHTML(typeName(p.type))}</span></div><div class="comments">${(p.comments||[]).map(c=>`<div class="comment"><b>${escapeHTML(c.name)}</b>${escapeHTML(c.text)}</div>`).join('')}<form class="comment-form"><input name="comment" maxlength="400" placeholder="Escreva um comentário..." aria-label="Escreva um comentário"><button>Enviar</button></form></div>`;
+  el.querySelector('[data-like]').onclick=()=>{p.likes=p.likes||[];p.likes=p.likes.includes('me')?p.likes.filter(x=>x!=='me'):[...p.likes,'me'];savePosts();renderFeed();renderProfile()};
+  el.querySelector('[data-comment]').onclick=()=>el.querySelector('input[name=comment]').focus();
+  el.querySelector('[data-share]').onclick=async()=>{const text=`${profile.name} na Vibe: ${p.caption||typeName(p.type)}`;if(navigator.share){try{await navigator.share({title:'Vibe',text})}catch(e){}}else if(navigator.clipboard){navigator.clipboard.writeText(text).then(()=>toast('Texto copiado para compartilhar!')).catch(()=>toast(text))}else toast(text)};
+  el.querySelector('.comment-form').onsubmit=e=>{e.preventDefault();const input=e.currentTarget.elements.comment;const val=input.value.trim();if(!val)return;p.comments=p.comments||[];p.comments.push({name:profile.name,text:val});savePosts();renderFeed()};
+  el.querySelector('.post-menu').onclick=()=>{if(confirm('Excluir esta publicação?')){posts=posts.filter(x=>x.id!==p.id);if(p.mediaKey)delMedia(p.mediaKey);savePosts();renderFeed();renderProfile();toast('Publicação excluída.')}};
+  feed.appendChild(el);
+ }
+ renderProfile();
+}function setView(v){currentView=v;$$('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===v));$('#filters').classList.toggle('hidden',v!=='inicio');renderFeed();window.scrollTo({top:0,behavior:'smooth'})}
+$$('[data-view]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
+$$('[data-filter]').forEach(b=>b.onclick=()=>{currentFilter=b.dataset.filter;$$('[data-filter]').forEach(x=>x.classList.toggle('active',x===b));renderFeed()});
+$('#themeBtn').onclick=()=>{theme=theme==='dark'?'light':'dark';document.documentElement.dataset.theme=theme;localStorage.setItem('vibe-theme',theme);$('#themeBtn').textContent=theme==='dark'?'☀':'☾'};
+$('#themeBtn').textContent=theme==='dark'?'☀':'☾';
+$('#mediaInput').onchange=e=>{selectedFiles=[...e.target.files].slice(0,5);$('#fileLabel').textContent=selectedFiles.length?selectedFiles.map(f=>f.name).join(', '):'Nenhum arquivo selecionado';if(selectedFiles.some(f=>f.type.startsWith('video/'))&&$('#postType').value==='post')$('#postType').value='short'};
+$('#publishBtn').onclick=async()=>{
+ const caption=$('#captionInput').value.trim();if(!caption&&!selectedFiles.length){toast('Escreva algo ou adicione uma foto/vídeo.');return}
+ if(selectedFiles.length>1){toast('Por enquanto, escolha apenas um arquivo por publicação.');return}
+ const file=selectedFiles[0];if(file&&file.size>150*1024*1024){toast('O arquivo é muito grande. Escolha um arquivo de até 150 MB.');return}
+ const type=$('#postType').value;if(file&&file.type.startsWith('video/')&&type==='post')$('#postType').value='short';
+ const p={id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),caption,type:(file&&file.type.startsWith('video/')&&type==='post')?'short':type,created:Date.now(),likes:[],comments:[],mediaKey:null,mediaKind:file?.type||''};
+ try{if(file){p.mediaKey=p.id;await putMedia(p.mediaKey,file)}posts.push(p);savePosts();$('#captionInput').value='';$('#mediaInput').value='';selectedFiles=[];$('#fileLabel').textContent='Nenhum arquivo selecionado';setView('inicio');currentFilter='todos';$$('[data-filter]').forEach(x=>x.classList.toggle('active',x.dataset.filter==='todos'));toast('Publicado na sua Vibe! ✨')}catch(err){console.error(err);toast('Não foi possível salvar. Tente um arquivo menor.')}
+};
+function showProfileModal(){const root=$('#modalRoot');root.innerHTML=`<div class="modalback"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><h2 id="modalTitle">Editar meu perfil</h2><div class="field"><label for="pname">Nome</label><input id="pname" maxlength="50" value="${escapeHTML(profile.name)}"></div><div class="field"><label for="phandle">Usuário</label><input id="phandle" maxlength="30" value="${escapeHTML(profile.handle)}"></div><div class="field"><label for="pbio">Bio</label><textarea id="pbio" rows="3" maxlength="180">${escapeHTML(profile.bio||'')}</textarea></div><div class="modalfooter"><button class="action" id="cancelProfile">Cancelar</button><button class="primary" id="saveProfileBtn">Salvar perfil</button></div></div></div>`;$('#cancelProfile').onclick=()=>root.innerHTML='';$('#saveProfileBtn').onclick=()=>{profile.name=$('#pname').value.trim()||'Minha Vibe';let h=$('#phandle').value.trim().replace(/\s+/g,'');profile.handle=h?(h.startsWith('@')?h:'@'+h):'@minhavibe';profile.bio=$('#pbio').value.trim();saveProfile();root.innerHTML='';renderFeed();toast('Perfil atualizado!')};root.querySelector('.modalback').onclick=e=>{if(e.target===e.currentTarget)root.innerHTML=''}}
+$('#profileBtn').onclick=showProfileModal;$('#editProfileBtn').onclick=showProfileModal;
+(async()=>{try{await openDB();renderProfile();await renderFeed()}catch(e){console.error(e);$('#feed').innerHTML='<div class="empty"><b>Seu navegador não permitiu abrir o armazenamento local.</b><p>Tente abrir este arquivo no Safari ou Chrome atualizado.</p></div>'}})();
+</script>
+</body>
+</html>
